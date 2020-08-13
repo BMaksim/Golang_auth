@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -20,7 +21,8 @@ func NewDB(config *Config) *DB {
 
 func (db *DB) Open() error {
 	ctx := context.Background()
-	clientOpts := options.Client().ApplyURI(db.config.DatabaseURL)
+	dburl := os.Getenv("dburl")
+	clientOpts := options.Client().ApplyURI(dburl)
 	client, err := mongo.Connect(ctx, clientOpts)
 	if err != nil {
 		return (err)
