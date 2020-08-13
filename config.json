@@ -1,0 +1,5 @@
+{
+    "addr": ":8080",
+    "database_url": "mongodb+srv://mks:WcEALckb7BPv8X8@cluster0.llxhj.mongodb.net/auth?retryWrites=true&w=majority", 
+    "database_name": "auth"
+}
