@@ -8,11 +8,11 @@ import (
 	"github.com/BMaksim/TestTaskGolang/app/api"
 )
 
-var configPath string = "config.json"
+var configPath string = "../config.json"
 
 func main() {
 	config := api.NewConfig()
-	str, err := ioutil.ReadFile("config.json")
+	str, err := ioutil.ReadFile(configPath)
 	if err != nil {
 		log.Fatal(err)
 	}
