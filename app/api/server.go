@@ -107,7 +107,7 @@ func (s *Server) deleteToken() http.HandlerFunc {
 		ctx := context.Background()
 
 		//get data from db
-		findResult := coll.FindOne(ctx, bson.M{"_id": t.GUID, "ip": "[::1]:47124"})
+		findResult := coll.FindOne(ctx, bson.M{"_id": t.GUID, "ip": r.RemoteAddr})
 		if err := findResult.Err(); err != nil {
 			fmt.Println(err)
 		}
