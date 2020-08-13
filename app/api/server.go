@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -32,7 +33,8 @@ func (s *Server) StartServer() error {
 		return err
 	}
 	s.setRoutes()
-	return http.ListenAndServe(s.config.Addr, s.router)
+	port := os.Getenv("PORT")
+	return http.ListenAndServe(":"+port, s.router)
 }
 
 func (s *Server) setRoutes() {
@@ -61,7 +63,7 @@ func (s *Server) deleteTokens() http.HandlerFunc {
 		ctx := context.Background()
 
 		//get data from db
-		findResult := coll.FindOne(ctx, bson.M{"_id": t.GUID, "ip": "[::1]:47124"})
+		findResult := coll.FindOne(ctx, bson.M{"_id": t.GUID, "ip": r.RemoteAddr})
 		if err := findResult.Err(); err != nil {
 			fmt.Println(err)
 		}
